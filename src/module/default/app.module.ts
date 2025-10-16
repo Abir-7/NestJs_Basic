@@ -3,9 +3,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UserModule } from '../users/users.module';
 import { ProfilesModule } from '../profiles/profiles.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [UserModule, ProfilesModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
+    UserModule,
+    ProfilesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
