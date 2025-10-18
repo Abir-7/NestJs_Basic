@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 
 import { UserRepository } from './user.repository';
 import { CreateUserDTO } from './user.dto';
-import { makeOtp } from '../../utils/helper/make-otp.util';
-import { makeExpireTime } from '../../utils/helper/make-expire-time.util';
+import { makeOtp } from '../../../utils/helper/make-otp.util';
+import { makeExpireTime } from '../../../utils/helper/make-expire-time.util';
 
 @Injectable()
 export class UsersService {
@@ -23,7 +23,7 @@ export class UsersService {
         email: data.email,
         password: data.password,
       },
-      { full_name: data.profile_data.full_name },
+      data.profile_data,
       { code, expire_time, type: 'email' },
     );
   }

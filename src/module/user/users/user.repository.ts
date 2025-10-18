@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { DB_STRING } from '../../database/database_identifier';
+import { DB_STRING } from '../../../database/database_identifier';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
-import { schema } from '../../database/all_schema';
+import { schema } from '../../../database/all_schema';
 import { UserProfilesRepository } from '../user_profile/user_profiles.repository';
 import { UserAuthenticationRepository } from '../user_authentication/user_authentication.repository';
 import type { IAuthType } from '../user_authentication/user_authentication.schema';

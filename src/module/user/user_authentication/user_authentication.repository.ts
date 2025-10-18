@@ -1,8 +1,8 @@
 import { Inject } from '@nestjs/common';
-import { DB_STRING } from '../../database/database_identifier';
+import { DB_STRING } from '../../../database/database_identifier';
 
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
-import { schema } from '../../database/all_schema';
+import { schema } from '../../../database/all_schema';
 
 export class UserAuthenticationRepository {
   constructor(

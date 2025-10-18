@@ -1,6 +1,6 @@
 import { pgEnum } from 'drizzle-orm/pg-core';
 import { pgTable, uuid, varchar } from 'drizzle-orm/pg-core';
-import { timestamps } from '../../database/database_common_field';
+import { timestamps } from '../../../database/database_common_field';
 import { relations } from 'drizzle-orm';
 import { UserProfiles } from '../user_profile/user_profile.schema';
 import { boolean } from 'drizzle-orm/pg-core';

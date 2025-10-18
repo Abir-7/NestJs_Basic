@@ -3,7 +3,7 @@ import { pgTable, uuid, varchar, text } from 'drizzle-orm/pg-core';
 import { Users } from '../users/user.schema';
 import { pgEnum } from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
-import { timestamps } from '../../database/database_common_field';
+import { timestamps } from '../../../database/database_common_field';
 
 export const gender_values = ['male', 'female', 'other'] as const;
 export const GenderEnum = pgEnum('gender_enum', gender_values);
