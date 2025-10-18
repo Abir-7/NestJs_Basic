@@ -10,5 +10,6 @@ import { UserProfilesModule } from '../user_profile/user_profiles.module';
   controllers: [UsersController],
   providers: [UsersService, UserRepository],
   imports: [DatabaseModule, UserProfilesModule, UserAuthenticationModule],
+  exports: [UserRepository],
 })
 export class UserModule {}

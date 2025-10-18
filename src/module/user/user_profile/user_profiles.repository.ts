@@ -1,8 +1,8 @@
-import { Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { DB_STRING } from '../../../database/database_identifier';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import { schema } from '../../../database/all_schema';
-
+@Injectable()
 export class UserProfilesRepository {
   constructor(
     @Inject(DB_STRING) private database: NodePgDatabase<typeof schema>,
