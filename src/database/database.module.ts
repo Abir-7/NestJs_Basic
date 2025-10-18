@@ -2,12 +2,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Module } from '@nestjs/common';
-import { DB_STRING } from './database';
+import { DB_STRING } from './database_identifier';
 import { ConfigService } from '@nestjs/config';
 import { Pool } from 'pg';
 import { drizzle } from 'drizzle-orm/node-postgres';
+import { schema } from './all_schema';
 
-import * as UsersSchema from '../module/users/schema';
 @Module({
   providers: [
     {
@@ -17,7 +17,7 @@ import * as UsersSchema from '../module/users/schema';
           connectionString: configService.getOrThrow('DATABASE_URL'),
         });
         return drizzle(pool, {
-          schema: { ...UsersSchema },
+          schema: schema,
         });
       },
       inject: [ConfigService],

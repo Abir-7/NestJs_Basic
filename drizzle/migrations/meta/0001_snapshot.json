@@ -1,6 +1,6 @@
 {
-  "id": "a62ad7bf-3a90-406e-91f4-18c4cdde82b5",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "d2a7602c-d769-4e7e-be05-fcdc9753fc5f",
+  "prevId": "a62ad7bf-3a90-406e-91f4-18c4cdde82b5",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -230,6 +230,28 @@
           "primaryKey": false,
           "notNull": true
         },
+        "account_status": {
+          "name": "account_status",
+          "type": "user_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'pending_verification'"
+        },
+        "need_to_reset_password": {
+          "name": "need_to_reset_password",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "is_verified": {
+          "name": "is_verified",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
         "password": {
           "name": "password",
           "type": "varchar(255)",
@@ -300,6 +322,17 @@
       "values": [
         "user",
         "super_admin"
+      ]
+    },
+    "public.user_status": {
+      "name": "user_status",
+      "schema": "public",
+      "values": [
+        "active",
+        "pending_verification",
+        "blocked",
+        "disabled",
+        "deleted"
       ]
     }
   },
