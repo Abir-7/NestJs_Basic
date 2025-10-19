@@ -1,6 +1,19 @@
-import { Body, Controller, HttpCode, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  Patch,
+  Post,
+  UploadedFile,
+  UseInterceptors,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDTO } from '../user/users/user.dto';
+
+import { GlobalFileInterceptor } from '../../common/interceptors/global-file.interceptor';
+import { getFileId } from '../../utils/helper/getFileId';
+
+import { base_url } from '../../config/app.config';
 
 @Controller('auth')
 export class AuthController {
@@ -23,5 +36,13 @@ export class AuthController {
   @HttpCode(200)
   async userLogin(@Body() data: { email: string; password: string }) {
     return this.authService.userLogin(data);
+  }
+
+  @Patch('update_profile')
+  @UseInterceptors(GlobalFileInterceptor('file'))
+  updateUserProfile(@UploadedFile() file: Express.Multer.File) {
+    const file_id = getFileId(file.path);
+    const file_url = base_url + file_id;
+    console.log(file_id, file_url);
   }
 }
