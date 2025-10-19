@@ -8,10 +8,12 @@ import { DatabaseModule } from '../../database/database.module';
 import { UserModule } from '../user/users/users.module';
 import { UserProfilesModule } from '../user/user_profile/user_profiles.module';
 import { UserAuthenticationModule } from '../user/user_authentication/user_authentication.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   controllers: [AuthController],
   imports: [
+    JwtModule.register({}), // empty, we will sign manually
     DatabaseModule,
     UserModule,
     UserProfilesModule,

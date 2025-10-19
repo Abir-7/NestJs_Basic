@@ -1,5 +1,5 @@
 {
-  "id": "a62ad7bf-3a90-406e-91f4-18c4cdde82b5",
+  "id": "96abe202-8780-4a26-b33f-0bf4d4cc6705",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -35,7 +35,7 @@
         },
         "expire_time": {
           "name": "expire_time",
-          "type": "timestamp",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": true
         },
@@ -55,21 +55,21 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
           "default": "NOW()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
           "default": "NOW()"
         },
         "deleted_at": {
           "name": "deleted_at",
-          "type": "text",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
           "default": "NULL"
@@ -155,21 +155,21 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
           "default": "NOW()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
           "default": "NOW()"
         },
         "deleted_at": {
           "name": "deleted_at",
-          "type": "text",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
           "default": "NULL"
@@ -230,6 +230,28 @@
           "primaryKey": false,
           "notNull": true
         },
+        "account_status": {
+          "name": "account_status",
+          "type": "user_status",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'pending_verification'"
+        },
+        "need_to_reset_password": {
+          "name": "need_to_reset_password",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
+        "is_verified": {
+          "name": "is_verified",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": true,
+          "default": false
+        },
         "password": {
           "name": "password",
           "type": "varchar(255)",
@@ -238,21 +260,21 @@
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
           "default": "NOW()"
         },
         "updated_at": {
           "name": "updated_at",
-          "type": "text",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
           "default": "NOW()"
         },
         "deleted_at": {
           "name": "deleted_at",
-          "type": "text",
+          "type": "timestamp with time zone",
           "primaryKey": false,
           "notNull": false,
           "default": "NULL"
@@ -300,6 +322,17 @@
       "values": [
         "user",
         "super_admin"
+      ]
+    },
+    "public.user_status": {
+      "name": "user_status",
+      "schema": "public",
+      "values": [
+        "active",
+        "pending_verification",
+        "blocked",
+        "disabled",
+        "deleted"
       ]
     }
   },

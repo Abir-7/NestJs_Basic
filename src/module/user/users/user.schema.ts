@@ -23,7 +23,7 @@ export type TRole = (typeof roleValues)[number];
 // Define users table
 export const Users = pgTable('users', {
   id: uuid('id').primaryKey().defaultRandom(),
-  role: RoleEnum('role').default('user'),
+  role: RoleEnum('role').default('user').notNull(),
   email: varchar('email', { length: 255 }).notNull().unique(),
   account_status: UserStatusEnum('account_status')
     .notNull()

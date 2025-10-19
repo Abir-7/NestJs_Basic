@@ -21,7 +21,7 @@ export const UserAuthentication = pgTable('user_authentication', {
     }),
   code: text('code'),
   token: text('token'),
-  expire_time: timestamp('expire_time').notNull(),
+  expire_time: timestamp('expire_time', { withTimezone: true }).notNull(),
   is_success: boolean('is_success').default(false),
   type: AuthTypeEnum('type').notNull(),
   ...timestamps,

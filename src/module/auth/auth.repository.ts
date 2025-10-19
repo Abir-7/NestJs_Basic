@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Inject, Injectable } from '@nestjs/common';
 import { DB_STRING } from '../../database/database_identifier';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
@@ -50,5 +51,30 @@ export class AuthRepository {
 
       return { user, profile, auth };
     });
+  }
+
+  async verifyUserEmail(user_id: string, authentication_id: string) {
+    try {
+      return await this.database.transaction(async (tx) => {
+        const [updated_user] =
+          await this.userRepository.updateUserEmailVerifyStatus(
+            user_id,
+            true,
+            tx,
+          );
+        const [updated_authentication_data] =
+          await this.userAuthenticationRepository.updateUserAuthenticationByUserIdAndOpt(
+            authentication_id,
+            tx,
+          );
+
+        return {
+          ...updated_user,
+          is_success: updated_authentication_data.is_success,
+        };
+      });
+    } catch (error) {
+      throw new Error('Something went wrong!');
+    }
   }
 }
