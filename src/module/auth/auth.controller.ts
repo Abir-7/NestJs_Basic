@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+
 import {
   Body,
   Controller,
@@ -14,12 +15,16 @@ import { CreateUserDTO } from '../user/users/user.dto';
 import { GlobalFileInterceptor } from '../../common/interceptors/global-file.interceptor';
 import { getFileId } from '../../utils/helper/getFileId';
 
-import { base_url } from '../../config/app.config';
+import { ConfigService } from '@nestjs/config';
+
 import { parseJsonData } from '../../utils/helper/parseJson';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly configService: ConfigService,
+  ) {}
 
   @Post('register')
   async register(@Body() data: CreateUserDTO) {
@@ -46,6 +51,7 @@ export class AuthController {
     @UploadedFile() file: Express.Multer.File,
     @Body() body: { data: any },
   ) {
+    const base_url = this.configService.get('BASE_URL');
     const file_id = getFileId(file.path);
     const file_url = base_url + file_id;
     console.log(file_id, file_url);
