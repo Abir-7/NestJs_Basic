@@ -5,5 +5,6 @@ import { UserDeviceController } from './user-device.controller';
 @Module({
   controllers: [UserDeviceController],
   providers: [UserDeviceService],
+  exports: [UserDeviceService],
 })
 export class UserDeviceModule {}
