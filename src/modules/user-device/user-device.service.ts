@@ -47,4 +47,31 @@ export class UserDeviceService {
 
     return this.userDeviceRepository.save(device);
   }
+
+  async get_user_device_info(
+    user: User,
+    deviceFingerprint?: string,
+  ): Promise<{
+    totalLoginDevices: number;
+    isSameDevice: boolean;
+  }> {
+    const [totalLoginDevices, existingDevice] = await Promise.all([
+      this.userDeviceRepository.count({
+        where: {
+          user: { id: user.id },
+          isLoggedIn: true,
+        },
+      }),
+      deviceFingerprint
+        ? this.userDeviceRepository.findOne({
+            where: {
+              deviceFingerprint,
+              user: { id: user.id },
+            },
+          })
+        : Promise.resolve(null),
+    ]);
+
+    return { totalLoginDevices, isSameDevice: !!existingDevice };
+  }
 }
