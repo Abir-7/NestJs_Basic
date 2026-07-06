@@ -40,6 +40,7 @@ export class AuthService {
     @InjectRepository(UserProfilePhoto)
     private readonly userProfilePhotoRepository: Repository<UserProfilePhoto>,
   ) {}
+
   async register(dto: RegisterDto) {
     const existingUser = await this.userRepository.findOne({
       where: dto.email ? { email: dto.email } : { phone: dto.phone },
@@ -101,6 +102,7 @@ export class AuthService {
       userId: savedUser.id,
     };
   }
+
   async forgotPassword(dto: ForgotPasswordDto) {
     const { email, phone } = dto;
 
